@@ -18,7 +18,6 @@ const Staking = ({ walletAddress }) => {
     const stakeSOL = async (amount) => {
         
         if (!connected || !wallet || !walletAddress) return;
-        console.log("ddd")
         try {
             const transaction = new Transaction();
             const lamports = Number(amount) * LAMPORTS_PER_SOL; // Convert SOL to lamports
@@ -30,7 +29,6 @@ const Staking = ({ walletAddress }) => {
                 authorizedPubkey: wallet.publicKey,
                 votePubkey: new PublicKey(validatorPublicKey),
             });
-
             transaction.add(stakeInstruction);
             const signature = await wallet.sendTransaction(transaction, connection);
             await connection.confirmTransaction(signature, 'confirmed');
@@ -58,7 +56,6 @@ const Staking = ({ walletAddress }) => {
         setStakeAmount('');
     };
    
-    
 
     return (
         <form onSubmit={handleSubmit} className="flex items-center space-x-8 mt-4 mb-2">
